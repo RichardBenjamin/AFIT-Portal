@@ -1,0 +1,223 @@
+CREATE TABLE potterUsers (
+    id serial PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    roles VARCHAR(255)
+);
+
+CREATE TABLE uploadWork (
+    id serial PRIMARY KEY,
+    itemName VARCHAR(255),
+    dateValue VARCHAR(255),
+    categoryValue VARCHAR(255),
+    itemDescription VARCHAR(255)
+);
+
+
+ALTER TABLE uploadWork ALTER COLUMN itemDescription TYPE VARCHAR(30000);
+
+
+SELECT * FROM uploadWork WHERE categoryValue = 'Planters';
+
+
+
+UPDATE users SET emails = '{"item1", "item2", "item3"}' WHERE email = 'paul@gmail.com';
+
+
+CREATE TABLE cart ( id serial PRIMARY KEY, itemName VARCHAR(255), addedOn VARCHAR(255));
+
+
+
+-- Create the 'product' table
+CREATE TABLE product (
+    id SERIAL PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL,
+    product_details VARCHAR(255) NOT NULL
+);
+
+
+INSERT INTO product (product_name, product_details)
+VALUES 
+    ('rice', 'half-cup'),
+    ('beans', 'full-cup'),
+    ('corn', 'others'),
+    ('apple', 'sweet and juicy');
+
+
+-- Create the 'product' table
+CREATE TABLE userp (
+    id SERIAL PRIMARY KEY,
+    userpname VARCHAR(255) NOT NULL,
+    userpdetails VARCHAR(255) NOT NULL
+);
+
+
+-- Insert four users into the 'product' table
+INSERT INTO userp (userpname, userpdetails)
+VALUES 
+    ('John', 'Tall and friendly'),
+    ('Alice', 'Creative and diligent'),
+    ('Emily', 'Analytical and detail-oriented'),
+    ('Michael', 'Versatile and dedicated');
+
+
+CREATE TABLE cartp (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    FOREIGN KEY (user_id) REFERENCES userp(id),
+    FOREIGN KEY (product_id) REFERENCES product(id)
+);
+
+
+CREATE TABLE cartx (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT,
+    item_id INT,
+    FOREIGN KEY (user_id) REFERENCES potterUsers(id),
+    FOREIGN KEY (item_id) REFERENCES uploadWork(id)
+);
+
+
+
+CREATE TABLE purchased (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT,
+    item_id INT,
+    FOREIGN KEY (user_id) REFERENCES potterUsers(id),
+    FOREIGN KEY (item_id) REFERENCES uploadWork(id)
+);
+
+
+
+SELECT product.product_name, product.product_details, userp.userpname
+FROM cartp
+JOIN product ON cartp.product_id = product.id
+JOIN userp ON cartp.user_id = userp.id;
+WHERE userp.id = 2;
+
+
+
+INSERT INTO cartp (user_id, product_id)
+VALUES 
+    (2, 2),
+    (2, 3),
+    (3, 2);
+
+
+-- for particular user :
+
+
+INSERT INTO cartx (user_id, item_id)
+VALUES 
+    (28, 35),
+    (28, 36),
+    (43, 27);
+
+
+
+CREATE TABLE testing (
+    id SERIAL PRIMARY KEY,
+    one VARCHAR(255) NOT NULL,
+    two VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE testing2 (
+    id SERIAL PRIMARY KEY,
+    one VARCHAR(255),
+    two VARCHAR(255) 
+);
+
+
+
+INSERT INTO testing (one, two)
+VALUES 
+    (28, 35),
+    (28, 36),
+    (43, 27);
+
+
+
+
+
+SELECT uploadWork.itemname, uploadWork.categoryValue, potterUsers.name
+FROM cartx
+JOIN uploadWork ON cartx.item_id = uploadWork.id
+JOIN potterUsers ON cartx.user_id = potterUsers.id
+WHERE potterUsers.id = 28;
+
+
+
+
+update query
+
+
+/// UPDATE uploadWork SET categoryValue = 'Decorative Pieces' WHERE id = 38;
+/// UPDATE uploadWork SET categoryValue = 'Tableware' WHERE id = 27;
+/// UPDATE uploadWork SET categoryValue = 'Planters' WHERE id = 26;
+/// UPDATE uploadWork SET  price = 250 WHERE id = 27;
+
+
+
+DELETE FROM potterUsers WHERE id = 41;
+
+
+
+
+-- To search multiple colums at the sme time
+
+SELECT *
+FROM uploadWork
+WHERE itemname ILIKE '%cookware%'
+   OR categoryvalue ILIKE '%cookware%'
+   OR localname ILIKE '%cookware%';
+
+
+
+
+-- To filter and search 
+
+SELECT column1, column2, ...
+FROM your_table
+WHERE condition
+AND search_column ILIKE '%search_term%';
+
+
+
+
+
+
+
+
+
+
+url 
+https://potterpallete.onrender.com/register/explore/category/mug
+
+
+
+
+INSERT INTO students (Email, matric_number, jamb_number, Password)
+VALUES 
+('john@gmail.com', 'U20CYS1001', '26383662DF', 'Password#33'),
+('jane@gmail.com', 'U20CYS1002', '26383663DF', 'Password#33'),
+('alex@gmail.com', 'U20CYS1003', '26383664DF', 'Password#33'),
+('emily@gmail.com', 'U20CYS1004', '26383665DF', 'Password#33'),
+('michael@gmail.com', 'U20CYS1005', '26383666DF', 'Password#33')
+('rose@gmail.com', 'U20CYS1006', '26383667DF', 'Password#33'),
+('paul@gmail.com', 'U20CYS1007', '26383668DF', 'Password#33'),
+('fatima@gmail.com', 'U20CYS1008', '26383669DF', 'Password#33'),
+('joshua@gmail.com', 'U20CYS1009', '26383670DF', 'Password#33'),
+('deborah@gmail.com', 'U20CYS1010', '26383671DF', 'Password#33');
+
+
+
+CREATE TABLE students (
+    id serial PRIMARY KEY,
+    Email VARCHAR(255),
+    matric_number VARCHAR(255),
+    jamb_number VARCHAR(255),
+    Password VARCHAR(255)
+);
