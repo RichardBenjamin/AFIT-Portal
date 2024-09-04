@@ -1,55 +1,88 @@
 const username = document.querySelector('#username'),
       email = document.querySelector('#email'),
+      JambRegNumber = document.querySelector('#JambRegNumber'),
+      MatricNumber = document.querySelector('#MatricNumber'),
       password = document.querySelector('#password'),
       password2 = document.querySelector('#password2'),
       buttonBtn = document.querySelector('#submitBtn'),
-      checkBox = document.querySelectorAll('.radioBtn'),
-      usernameErrorMsg = document.querySelector('#usernameErrorMessage'),
+      JambErrorMsg = document.querySelector('#JambErrorMessage'),
       emailErrorMsg = document.querySelector('#emailErrorMessage'),
+      MarticErrorMessage = document.querySelector('#MarticErrorMessage'),
       passwordErrorMsg = document.querySelector('#passwordErrorMessage'),
       password2ErrorMsg = document.querySelector('#password2ErrorMessage'),
+      alert = document.querySelector('.Success_Alert')
       emailPattern =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
       passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
-      baseURL = "https://potterpallete.onrender.com/";
+      baseURL = "http://localhost:305/";
 
 
+
+              // Function to trigger the animation
+              function animateBox() {
+                alert.classList.toggle('activeAlert');  
+
+                setTimeout(function() {
+                  window.location.href = "./login.html"
+                  }, 4000);
+              }
+
+              
+      
+  
 
 
 buttonBtn.addEventListener('click', async (e) => {
-    const role = check()
+    // const role = check()
     e.preventDefault();
 
 if (
-    nameValidation() &&
+  matricValidation() &&
+    JambRegNumberValidation() &&
     emailValidation() &&
     passwordValidation() &&
     confirmPasswordValidation()
    
   ) {
     let userData = {
-      name: username.value.trim(),
       email: email.value.trim().toLowerCase(),
-      password: password.value,
-      roles: role
+      matric_number: MatricNumber.value.trim(),
+      jamb_number: JambRegNumber.value.trim(),
+      password: password.value
     };
     postData(`${baseURL}register`, userData);
-    console.log(`This is the ${role}`);
   }
 
 
-function nameValidation(){
-    if (username.value === '') {
-        usernameErrorMsg.innerText = 'Please enter your username';
-        username.classList.add('error');
-    }   else if (username.value.trim().length < 3) {
-        usernameErrorMsg.innerText = 'Name must be at least 3 characters';
-        username.classList.add('error');
+function matricValidation(){
+    if (MatricNumber.value === '') {
+      MarticErrorMessage.innerText = 'Please enter your username';
+      MatricNumber.classList.add('error');
+    }   else if (MatricNumber.value.trim().length < 7) {
+      MarticErrorMessage.innerText = 'Matric Number must be at least 7 characters';
+      MatricNumber.classList.add('error');
+    }   else if (MatricNumber.value.charAt(0).toUpperCase() !== 'U') {
+      console.log(MatricNumber.value.charAt(0));
+      
+      MarticErrorMessage.innerText = 'Enter a valid Matric Number';
+      MatricNumber.classList.add('error');
     }   else {
-        usernameErrorMsg.innerText = '';
+      MarticErrorMessage.innerText = '';
         return true;
     }
 }
-username.addEventListener("input", nameValidation);
+function JambRegNumberValidation(){
+    if (JambRegNumber.value === '') {
+      JambErrorMsg.innerText = 'Please enter your Jamb Reg Number';
+        JambRegNumber.classList.add('error');
+    }   else if (JambRegNumber.value.trim().length < 8) {
+      JambErrorMsg.innerText = 'Name must be at least 8 characters';
+        JambRegNumber.classList.add('error');
+    }   else {
+      JambErrorMsg.innerText = '';
+        return true;
+    }
+}
+JambRegNumber.addEventListener("input", JambRegNumberValidation);
 
 function emailValidation(){
     if (email.value === '') {
@@ -68,19 +101,6 @@ function emailValidation(){
 }
 email.addEventListener("input", emailValidation);
 
-function check(){
-    var role;
-    checkBox.forEach((btn)=>{
-        if (btn.checked) {
-            console.log(btn, btn.value);
-            role = btn.value
-            console.log(role);
-            return
-        }
-    })
-    return role
-}
-check()
 
 function passwordValidation(){
     if (password.value === '') {
@@ -110,9 +130,7 @@ function confirmPasswordValidation(){
 }
 
 password2.addEventListener("input", confirmPasswordValidation);
-
-
-
+      
 
 async function postData(url, data) {
   try {
@@ -130,22 +148,31 @@ async function postData(url, data) {
       console.log(bodydata);
 
       if (bodydata.message == "Success") {
-        username.value = "";
+        animateBox()
+        
+        JambRegNumber.value ="",
         email.value = "";
         password.value = "";
         password2.value = "";
-        console.log(bodydata.updateToken);
+        console.log("Success");
 
-        localStorage.setItem("updatetoken", bodydata.updateToken);
-        window.location.href = "./login.html"
+        // window.location.href = "./login.html"
         
 
       }
-      if (bodydata.message == "Already Exists") {
+      if (bodydata.message == "Email already Exists") {
         emailErrorMsg.innerText = "Email already exists.";
         emailErrorMsg.classList.add('error');
-        email.value = "";
-        password.value = "";
+        // email.value = "";
+        // password.value = "";
+
+      } else if (bodydata.message == "Matric number already exists") {
+        MarticErrorMessage .innerText = "Matric number already exists.";
+        MarticErrorMessage.classList.add('error');
+
+      } else if (bodydata.message == "Jamb Reg Number already Exists") {
+        JambErrorMsg.innerText = "Jamb Reg Number already Exists.";
+        JambErrorMsg.classList.add('error');
       }
     } catch (err) {
       console.error(`Error: ${err}`);

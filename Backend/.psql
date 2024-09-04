@@ -221,3 +221,10 @@ CREATE TABLE students (
     jamb_number VARCHAR(255),
     Password VARCHAR(255)
 );
+
+
+
+
+
+
+http://localhost:305/register/Allusers

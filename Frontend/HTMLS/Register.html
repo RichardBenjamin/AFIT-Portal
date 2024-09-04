@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+        <link rel="icon" href="images/favicon.png"/>
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">  -->
+        <!-- <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"> -->
+        <link rel="shortcut icon" href="../IMAGES/AFIT logo.jpeg"  type="image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="../CSS/Register.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="Success_Alert">Registeration Successful</div>
+        <div class="wrapper">
+            <img id="Afit-logo" src="../IMAGES/AFIT logo.jpeg" alt="">
+            <div class="container">
+                <form class="login-form">
+                    <span class="form-title">STUDENT PORTAL REGISTERATION</span>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="input-group">
+                            <span class="fa fa-envelope" aria-hidden="true"></span>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required />
+                            <p id="emailErrorMessage"></p>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label>JAMB Registeration Number</label>
+                        <div class="input-group">
+                            <span class="fa-solid fa-user" aria-hidden="true"></span>
+                            <input type="text" name="text" id="JambRegNumber" class="form-control" placeholder="Enter your JAMB Reg Number" required>
+                            <p id="JambErrorMessage"></p>
+                        </div>
+                    </div>
+                    <div></div> 
+                    <div class="form-group">
+                        <label>Matric Number</label>
+                        <div class="input-group">
+                            <span class="fa-solid fa-user" aria-hidden="true"></span>
+                            <input type="text" name="text" id="MatricNumber" class="form-control" placeholder="Enter your Matric Number" required>
+                            <p id="MarticErrorMessage"></p>
+                        </div>
+                    </div>
+                    <div></div>  
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-group">
+                            <span class="fa fa-lock" aria-hidden="true"></span>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter your Password" required>
+                            <p id="passwordErrorMessage"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-group">
+                            <span class="fa fa-lock" aria-hidden="true"></span>
+                            <input type="password" name="password2" id="password2" class="form-control" placeholder="Enter your Password again" required>
+                            <p id="password2ErrorMessage"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Sign Up" id="submitBtn">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+                    <!-- <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="remember" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember Me</label>
+                    </div> -->
+                    
+                    <!-- <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Login" id="submitBtn">
+                        <span class="forgot-link"><a href="./forgetPassword.html">Forgot password?</a></span>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+        <div id="background" class="background">
+        </div>
+        <script src="../JS/register.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+        <link rel="icon" href="images/favicon.png"/>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="../CSS/register2.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <form class="login-form">
+                    <span class="form-title">SIGN UP</span>
+                    <div></div> 
+                    <div class="form-group">
+                        <label>Username</label>
+                        <div class="input-group">
+                            <span class="fa-solid fa-user" aria-hidden="true"></span>
+                            <input type="text" name="text" id="username" class="form-control" placeholder="Enter your username" required>
+                            <p id="usernameErrorMessage"></p>
+                        </div>
+                    </div>
+                    <div></div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="input-group">
+                            <span class="fa fa-envelope" aria-hidden="true"></span>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required />
+                            <p id="emailErrorMessage"></p>
+                        </div>
+                    </div>    
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-group">
+                            <span class="fa fa-lock" aria-hidden="true"></span>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter your Password" required>
+                            <p id="passwordErrorMessage"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-group">
+                            <span class="fa fa-lock" aria-hidden="true"></span>
+                            <input type="password" name="password2" id="password2" class="form-control" placeholder="Enter your Password again" required>
+                            <p id="password2ErrorMessage"></p>
+                        </div>
+                    </div>
+                    <div class="radio"> 
+                        <label>Buyer<input type="radio" id="radioBtn1" name="radiobutton" class="radioBtn" value="Buyer" checked></label>
+                        <label>Potter<input type="radio" id="radioBtn2" name="radiobutton" class="radioBtn" value="Potter"></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Sign Up" id="submitBtn">
+                    </div>
+                    <p>Don't have an account? <a href="login.html">Login here</a>.</p>
+                </form>
+            </div>
+        </div>
+        <div id="background" class="background">
+
+        </div>
+        <script src="../JS/register.js"></script>
+    </body>
+</html> -->

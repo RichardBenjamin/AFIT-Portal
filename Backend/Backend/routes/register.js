@@ -8,7 +8,7 @@ const secret = process.env.SECRET;
 
 router.get("/Allusers", async function (req, res, next) {
     try {
-        const results = await db.query("SELECT * FROM potterUsers")
+        const results = await db.query("SELECT * FROM students")
         res.json(results.rows)
         
     } catch (err) {
@@ -18,42 +18,6 @@ router.get("/Allusers", async function (req, res, next) {
 });
 
 
-
-
-
-
-
-
-  // router.post("/", async (req, res, next) =>{
-  //   let hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
-  //   console.log(req.body.email);
-  //   try {
-  //     const results = await db.query("SELECT email FROM students WHERE email=$1", [req.body.email]);
-
-  //     // const results = await db.query("SELECT email FROM students WHERE email=$1", [req.body.email]);
-
-      
-  //     console.log(results);
-  //     console.log("error found");
-  //     if (results.rows.length > 0) {
-  //       res.json({ message: "Already Exists" });
-  //     } else {
-  //       console.log("nothing found");
-  //       const username = "username"
-  //       const queryText = ("INSERT INTO students (email, matric_number, jamb_number, password VALUES ($1, $2, $3, $4) RETURNING *")
-  //       const values = [req.body.email, req.body.matric_number, req.body.jamb_number, hashedPassword];
-  //       const user = await db.query(queryText, values);
-
-  //       const updateToken = jwt.sign({ username }, secret, {
-  //         expiresIn: 60 * 60,
-  //       });
-  //       res.json({success: true, data: user.rows[0], message: "Success",});
-  //     }
-  //   } catch (err) {
-  //     return next(err)
-  //   }
-  // })
-
   
   
   router.post("/", async (req, res, next) => {
@@ -61,24 +25,33 @@ router.get("/Allusers", async function (req, res, next) {
     console.log(req.body.email);
     
     try {
-      const results = await db.query("SELECT email FROM students WHERE email=$1", [req.body.email]);
-      
-      console.log(results);
-      console.log("error found");
-      if (results.rows.length > 0) {
-        res.json({ message: "Already Exists" });
+      const emailresults = await db.query("SELECT email FROM students WHERE email=$1", [req.body.email]);
+      const MatricNumberResults = await db.query("SELECT matric_number FROM students WHERE matric_number=$1", [req.body.matric_number]);
+      const JambRegNumberResults = await db.query("SELECT jamb_number FROM students WHERE jamb_number=$1", [req.body.jamb_number]);
+
+      if (emailresults.rows.length > 0) {
+        res.json({ message: "Email already Exists" });
+        console.log("Email already exists");
+
+      } else if (MatricNumberResults.rows.length > 0) {
+        res.json({ message: "Matric number already exists" });
+        console.log("matric number already exists");
+
+      } else if (JambRegNumberResults.rows.length > 0) {
+        res.json({ message: "Jamb Reg Number already Exists" });
+        console.log("Jamb Reg Number already exists");
+
       } else {
-        console.log("nothing found");
-        const username = "username";
         const queryText = "INSERT INTO students (email, matric_number, jamb_number, password) VALUES ($1, $2, $3, $4) RETURNING *";
         const values = [req.body.email, req.body.matric_number, req.body.jamb_number, hashedPassword];
         const user = await db.query(queryText, values);
-  
-        const updateToken = jwt.sign({ username }, secret, {
-          expiresIn: 60 * 60,
-        });
+        
+        
+        
+        console.log("success---");
         res.json({ success: true, data: user.rows[0], message: "Success" });
       }
+      
     } catch (err) {
       return next(err);
     }
@@ -187,16 +160,7 @@ router.get("/Allusers", async function (req, res, next) {
   router.patch("/changepassword/:id", async (req, res, next) =>{
     const foundUser = await db.query("SELECT password FROM students WHERE id=$1", [req.params.id])
     console.log("user password-",foundUser.rows[0].password);
-    // const hashedPassword = await bcrypt.compare(
-    //   req.body.password,
-    //   foundUser.rows[0].password
-    // );
-    // console.log("hashed password-", hashedPassword);
-    // console.log("req.body.password-", req.body.password);
 
-    // if (hashedPassword === false) {
-    //   return res.json({ message: "Invalid" });
-    // } 
     if (1 == 1){
       let hashedPassword2 = await bcrypt.hash(req.body.password2, saltRounds)
       console.log("line 123", hashedPassword2);
@@ -218,3 +182,37 @@ router.get("/Allusers", async function (req, res, next) {
 
 
 module.exports = router;
+
+
+
+
+
+  // router.post("/", async (req, res, next) =>{
+  //   let hashedPassword = await bcrypt.hash(req.body.password, saltRounds)
+  //   console.log(req.body.email);
+  //   try {
+  //     const results = await db.query("SELECT email FROM students WHERE email=$1", [req.body.email]);
+
+  //     // const results = await db.query("SELECT email FROM students WHERE email=$1", [req.body.email]);
+
+      
+  //     console.log(results);
+  //     console.log("error found");
+  //     if (results.rows.length > 0) {
+  //       res.json({ message: "Already Exists" });
+  //     } else {
+  //       console.log("nothing found");
+  //       const username = "username"
+  //       const queryText = ("INSERT INTO students (email, matric_number, jamb_number, password VALUES ($1, $2, $3, $4) RETURNING *")
+  //       const values = [req.body.email, req.body.matric_number, req.body.jamb_number, hashedPassword];
+  //       const user = await db.query(queryText, values);
+
+  //       const updateToken = jwt.sign({ username }, secret, {
+  //         expiresIn: 60 * 60,
+  //       });
+  //       res.json({success: true, data: user.rows[0], message: "Success",});
+  //     }
+  //   } catch (err) {
+  //     return next(err)
+  //   }
+  // })
