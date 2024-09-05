@@ -2,6 +2,7 @@ const username = document.querySelector('#username'),
       email = document.querySelector('#email'),
       JambRegNumber = document.querySelector('#JambRegNumber'),
       MatricNumber = document.querySelector('#MatricNumber'),
+      Name = document.querySelector('#Fullname')
       password = document.querySelector('#password'),
       password2 = document.querySelector('#password2'),
       buttonBtn = document.querySelector('#submitBtn'),
@@ -9,7 +10,7 @@ const username = document.querySelector('#username'),
       emailErrorMsg = document.querySelector('#emailErrorMessage'),
       MarticErrorMessage = document.querySelector('#MarticErrorMessage'),
       passwordErrorMsg = document.querySelector('#passwordErrorMessage'),
-      password2ErrorMsg = document.querySelector('#password2ErrorMessage'),
+      NameErrorMsg = document.querySelector('#NameErrorMessage'),
       alert = document.querySelector('.Success_Alert')
       emailPattern =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
       passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/,
@@ -40,18 +41,37 @@ if (
     JambRegNumberValidation() &&
     emailValidation() &&
     passwordValidation() &&
-    confirmPasswordValidation()
+    NameValidation()
    
   ) {
     let userData = {
       email: email.value.trim().toLowerCase(),
       matric_number: MatricNumber.value.trim(),
       jamb_number: JambRegNumber.value.trim(),
-      password: password.value
+      password: password.value,
+      names: Name.value.trim()
     };
+    console.log(Name.value);
+    console.log(userData);
+    
+    
     postData(`${baseURL}register`, userData);
   }
 
+
+  function NameValidation(){
+    if (Name.value === '') {
+      NameErrorMsg.innerText = 'Please enter your Full Name';
+        Name.classList.add('error');
+    }   else if (Name.value.trim().length < 5) {
+      NameErrorMsg.innerText = 'Full Name must be at least 5 characters';
+       Name.classList.add('error');
+    }   else {
+      NameErrorMsg.innerText = '';
+        return true;
+    }
+}
+Name.addEventListener("input", NameValidation);
 
 function matricValidation(){
     if (MatricNumber.value === '') {
@@ -83,6 +103,7 @@ function JambRegNumberValidation(){
     }
 }
 JambRegNumber.addEventListener("input", JambRegNumberValidation);
+
 
 function emailValidation(){
     if (email.value === '') {
@@ -119,17 +140,17 @@ function passwordValidation(){
 
 password.addEventListener("input", passwordValidation);
 
-function confirmPasswordValidation(){
-    if  (password2.value !== password.value) {
-        password2ErrorMsg.innerText = "Passwords don't match";
-        password2ErrorMsg.classList.add('error')
-    }   else {
-        password2ErrorMsg.innerText = '';
-        return true
-    }
-}
+// function confirmPasswordValidation(){
+//     if  (password2.value !== password.value) {
+//         password2ErrorMsg.innerText = "Passwords don't match";
+//         password2ErrorMsg.classList.add('error')
+//     }   else {
+//         password2ErrorMsg.innerText = '';
+//         return true
+//     }
+// }
 
-password2.addEventListener("input", confirmPasswordValidation);
+// password2.addEventListener("input", confirmPasswordValidation);
       
 
 async function postData(url, data) {
@@ -163,8 +184,7 @@ async function postData(url, data) {
       if (bodydata.message == "Email already Exists") {
         emailErrorMsg.innerText = "Email already exists.";
         emailErrorMsg.classList.add('error');
-        // email.value = "";
-        // password.value = "";
+
 
       } else if (bodydata.message == "Matric number already exists") {
         MarticErrorMessage .innerText = "Matric number already exists.";

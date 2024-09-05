@@ -140,7 +140,7 @@ verifyButton.addEventListener("click", () => {
     
     function myAction() {
         console.log("Action executed!");
-        window.location.href = "https://afit.edu.ng/"
+        window.location.href = "../HTMLS/dashboard.html"
     }
     
     // Example usage

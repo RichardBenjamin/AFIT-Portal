@@ -44,12 +44,14 @@ router.post("/", async (req, res, next) => {
           const email = foundUser.rows[0].email
           const Matric_number = foundUser.rows[0].matric_number 
           const id = foundUser.rows[0].id
+          const name = foundUser.rows[0].names
+          const jambRegNumber = foundUser.rows[0].jamb_number
           console.log(foundUser.rows);
           const token = jwt.sign({ email }, secret, {
             expiresIn: 60 * 60,
           });
             console.log("logged");
-          return res.json({ token, message: "logged",  email, Matric_number, id});
+          return res.json({ token, message: "logged",  email, Matric_number, id, name, jambRegNumber});
 
         } catch (err) {
           return next(err)

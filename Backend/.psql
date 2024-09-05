@@ -228,3 +228,10 @@ CREATE TABLE students (
 
 
 http://localhost:305/register/Allusers
+
+
+
+psql -U kene -d animals
+
+ALTER TABLE students ADD COLUMN Names VARCHAR(255);
+

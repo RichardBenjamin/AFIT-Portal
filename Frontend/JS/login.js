@@ -104,9 +104,14 @@ const email = document.querySelector('#email'),
               }
 
               if (bodydata.message == "logged") {
-                localStorage.setItem("token", bodydata.token);
                 localStorage.setItem("email", bodydata.email);
                 localStorage.setItem("id", bodydata.id)
+                localStorage.setItem("Matric_number", bodydata.Matric_number)
+                localStorage.setItem("names", bodydata.name)
+                localStorage.setItem("jambRegNumber", bodydata.jambRegNumber)
+
+                console.log("ertyui");
+                
 
 
 

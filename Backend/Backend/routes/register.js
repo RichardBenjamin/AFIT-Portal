@@ -42,8 +42,8 @@ router.get("/Allusers", async function (req, res, next) {
         console.log("Jamb Reg Number already exists");
 
       } else {
-        const queryText = "INSERT INTO students (email, matric_number, jamb_number, password) VALUES ($1, $2, $3, $4) RETURNING *";
-        const values = [req.body.email, req.body.matric_number, req.body.jamb_number, hashedPassword];
+        const queryText = "INSERT INTO students (email, matric_number, jamb_number, password, names) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+        const values = [req.body.email, req.body.matric_number, req.body.jamb_number, hashedPassword, req.body.names];
         const user = await db.query(queryText, values);
         
         
