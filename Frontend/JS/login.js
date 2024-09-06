@@ -8,6 +8,9 @@ const email = document.querySelector('#email'),
       matricPattern =   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@#()^$!%*?&]{8,}$/;
       baseURL = "http://localhost:305/";
 
+      
+      
+
 
 
 
@@ -109,6 +112,11 @@ const email = document.querySelector('#email'),
                 localStorage.setItem("Matric_number", bodydata.Matric_number)
                 localStorage.setItem("names", bodydata.name)
                 localStorage.setItem("jambRegNumber", bodydata.jambRegNumber)
+
+                flow = "one"
+                console.log(flow);
+                localStorage.setItem("flow", flow)
+
 
                 console.log("ertyui");
                 

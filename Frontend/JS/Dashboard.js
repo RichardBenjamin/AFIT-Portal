@@ -4,10 +4,15 @@ const email = document.querySelector('#email'),
       Name = document.querySelector('#Fullname'),
       StudentName = document.querySelector('#StudentName'),
       logout = document.querySelector('#logout'),
+      flow2 = localStorage.getItem('flow2')
       localEmail= localStorage.getItem('email'),
       localName= localStorage.getItem('names'),
       localMatricNumber= localStorage.getItem('Matric_number'),
       localJambRegNumber= localStorage.getItem('jambRegNumber')
+
+      if (flow2 != "two") {
+        window.location.href = "../HTMLS/login.html"
+    }
 
 
       console.log(localEmail);

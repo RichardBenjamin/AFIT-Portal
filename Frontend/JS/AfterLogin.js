@@ -6,6 +6,15 @@ const step1 = document.querySelector(".step1"),
     inputs = document.querySelectorAll(".otp-group input"),
     nextButton = document.querySelector(".nextButton"),
     verifyButton = document.querySelector(".verifyButton");
+    flow = localStorage.getItem('flow')
+    console.log(flow);
+    if (flow != "one") {
+        window.location.href = "../HTMLS/login.html"
+    }
+
+    flow2 = "two"
+
+    
 
 let OTP = "";
 
@@ -127,9 +136,12 @@ verifyButton.addEventListener("click", () => {
     });
 
     if (OTP == values) {
+        console.log("tdftudytdut");
+        
         // step1.style.display = "none";
         step2.style.display = "none";
         step3.style.display = "block";
+        localStorage.setItem("flow2", flow2)
     } else {
         verifyButton.classList.add("error-shake");
     }
