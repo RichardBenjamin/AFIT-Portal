@@ -389,35 +389,6 @@ input[type="Password"] {
     background: transparent;
 }
 
-/* input[type="email"] {
-    font-size: 15px;
-    color: #333;
-    text-align: left;
-    letter-spacing: 1px;
-    padding: 14px 10px;
-    width: 93%;
-    display: inline-block;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    background: transparent;
-}
-input[type="Password"] {
-    font-size: 15px;
-    color: #333;
-    text-align: left;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-    padding: 14px 10px;
-    width: 93%;
-    display: inline-block;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    background: transparent;
-} */
-
-
 .background{
     background: url(../IMAGES/Project/18.jpeg) center center;
     background-position: center;
@@ -558,12 +529,3 @@ input[type="Password"] {
     100%{transform: translateY(-12vh)}
 }
 
-
-/* #Afit-logo:hover .Success_Alert{
-    animation: alert 2.5s ease forwards;
-} */
-
-
-/* .Success_Alert:hover{
-    top: -6vh;
-} */
