@@ -18,150 +18,7 @@ CREATE TABLE uploadWork (
 ALTER TABLE uploadWork ALTER COLUMN itemDescription TYPE VARCHAR(30000);
 
 
-SELECT * FROM uploadWork WHERE categoryValue = 'Planters';
 
-
-
-UPDATE users SET emails = '{"item1", "item2", "item3"}' WHERE email = 'paul@gmail.com';
-
-
-CREATE TABLE cart ( id serial PRIMARY KEY, itemName VARCHAR(255), addedOn VARCHAR(255));
-
-
-
--- Create the 'product' table
-CREATE TABLE product (
-    id SERIAL PRIMARY KEY,
-    product_name VARCHAR(255) NOT NULL,
-    product_details VARCHAR(255) NOT NULL
-);
-
-
-INSERT INTO product (product_name, product_details)
-VALUES 
-    ('rice', 'half-cup'),
-    ('beans', 'full-cup'),
-    ('corn', 'others'),
-    ('apple', 'sweet and juicy');
-
-
--- Create the 'product' table
-CREATE TABLE userp (
-    id SERIAL PRIMARY KEY,
-    userpname VARCHAR(255) NOT NULL,
-    userpdetails VARCHAR(255) NOT NULL
-);
-
-
--- Insert four users into the 'product' table
-INSERT INTO userp (userpname, userpdetails)
-VALUES 
-    ('John', 'Tall and friendly'),
-    ('Alice', 'Creative and diligent'),
-    ('Emily', 'Analytical and detail-oriented'),
-    ('Michael', 'Versatile and dedicated');
-
-
-CREATE TABLE cartp (
-    cart_id SERIAL PRIMARY KEY,
-    user_id INT,
-    product_id INT,
-    FOREIGN KEY (user_id) REFERENCES userp(id),
-    FOREIGN KEY (product_id) REFERENCES product(id)
-);
-
-
-CREATE TABLE cartx (
-    cart_id SERIAL PRIMARY KEY,
-    user_id INT,
-    item_id INT,
-    FOREIGN KEY (user_id) REFERENCES potterUsers(id),
-    FOREIGN KEY (item_id) REFERENCES uploadWork(id)
-);
-
-
-
-CREATE TABLE purchased (
-    cart_id SERIAL PRIMARY KEY,
-    user_id INT,
-    item_id INT,
-    FOREIGN KEY (user_id) REFERENCES potterUsers(id),
-    FOREIGN KEY (item_id) REFERENCES uploadWork(id)
-);
-
-
-
-SELECT product.product_name, product.product_details, userp.userpname
-FROM cartp
-JOIN product ON cartp.product_id = product.id
-JOIN userp ON cartp.user_id = userp.id;
-WHERE userp.id = 2;
-
-
-
-INSERT INTO cartp (user_id, product_id)
-VALUES 
-    (2, 2),
-    (2, 3),
-    (3, 2);
-
-
--- for particular user :
-
-
-INSERT INTO cartx (user_id, item_id)
-VALUES 
-    (28, 35),
-    (28, 36),
-    (43, 27);
-
-
-
-CREATE TABLE testing (
-    id SERIAL PRIMARY KEY,
-    one VARCHAR(255) NOT NULL,
-    two VARCHAR(255) NOT NULL
-);
-
-
-CREATE TABLE testing2 (
-    id SERIAL PRIMARY KEY,
-    one VARCHAR(255),
-    two VARCHAR(255) 
-);
-
-
-
-INSERT INTO testing (one, two)
-VALUES 
-    (28, 35),
-    (28, 36),
-    (43, 27);
-
-
-
-
-
-SELECT uploadWork.itemname, uploadWork.categoryValue, potterUsers.name
-FROM cartx
-JOIN uploadWork ON cartx.item_id = uploadWork.id
-JOIN potterUsers ON cartx.user_id = potterUsers.id
-WHERE potterUsers.id = 28;
-
-
-
-
-update query
-
-
-/// UPDATE uploadWork SET categoryValue = 'Decorative Pieces' WHERE id = 38;
-/// UPDATE uploadWork SET categoryValue = 'Tableware' WHERE id = 27;
-/// UPDATE uploadWork SET categoryValue = 'Planters' WHERE id = 26;
-/// UPDATE uploadWork SET  price = 250 WHERE id = 27;
-
-
-
-DELETE FROM potterUsers WHERE id = 41;
 
 
 
@@ -183,20 +40,6 @@ SELECT column1, column2, ...
 FROM your_table
 WHERE condition
 AND search_column ILIKE '%search_term%';
-
-
-
-
-
-
-
-
-
-
-url 
-https://potterpallete.onrender.com/register/explore/category/mug
-
-
 
 
 INSERT INTO students (Email, matric_number, jamb_number, Password)
@@ -224,14 +67,6 @@ CREATE TABLE students (
 
 
 
-
-
-
-http://localhost:305/register/Allusers
-
-
-
-psql -U kene -d animals
 
 ALTER TABLE students ADD COLUMN Names VARCHAR(255);
 
